@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "354949227098",
+    "project_id": "ultilytics",
+    "storage_bucket": "ultilytics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354949227098:android:61655e6b1957f58c736e63",
+        "android_client_info": {
+          "package_name": "com.example.ultilytics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354949227098-cs3207aigb8cddr92ge2pt307jma0iq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaaBHglYwGY-9gTdDjgY5uNXiO2mTN1yw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354949227098-cs3207aigb8cddr92ge2pt307jma0iq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
