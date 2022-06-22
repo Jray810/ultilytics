@@ -100,11 +100,12 @@ class _TeamListViewState extends State<TeamListView> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        child: FloatingActionButton(
-          child: Icon(CupertinoIcons.add),
+        padding: const EdgeInsets.all(8.0),
+        child: FloatingActionButton.extended(
+          icon: const Icon(CupertinoIcons.add),
+          label: const Text('Add Team'),
           onPressed: () {
             Navigator.of(context).pushNamed(addTeamRoute);
           },
