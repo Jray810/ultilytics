@@ -19,6 +19,7 @@ import 'package:ultilytics/views/teams/team_roster_view.dart';
 import 'package:ultilytics/views/teams/team_view.dart';
 
 import 'constants/routes.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       title: 'Ultilytics',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: GoogleFonts.poppins().fontFamily,
       ),
       home: const ControlView(),
       routes: {
