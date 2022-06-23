@@ -11,9 +11,80 @@ class TeamListView extends StatefulWidget {
   State<TeamListView> createState() => _TeamListViewState();
 }
 
+class MockTeamInfo {
+  const MockTeamInfo({required this.name});
+
+  final String name;
+}
+
 class _TeamListViewState extends State<TeamListView> {
 
   bool isLoggedIn = false;
+
+  static const List<MockTeamInfo> teamList = [
+    MockTeamInfo(name: "Name 1"),
+    MockTeamInfo(name: "Name 2"),
+    MockTeamInfo(name: "Name 3"),
+    MockTeamInfo(name: "Name 4"),
+  ];
+
+  late final String title;
+
+  Widget _buildListItem(BuildContext context, MockTeamInfo TeamInfo) {
+    return ListTile(
+      title: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RvcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60', width: 74, height: 74, fit: BoxFit.cover)
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(8, 1, 0, 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(TeamInfo.name)
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const Text('teamid'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+                child: Icon(CupertinoIcons.chevron_forward, size: 24),
+              ),
+            ],
+          ),
+        ]
+      ),
+      onTap: () {
+        Navigator.of(context).pushNamed(teamRoute);
+      }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,69 +107,9 @@ class _TeamListViewState extends State<TeamListView> {
           ),
         ],
       ),
-      body: Center(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    Navigator.of(context).pushNamed(teamRoute);
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RvcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60', width: 74, height: 74, fit: BoxFit.cover)
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 1, 0, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text('TeamName')
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text('teamid'),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-                            child: Icon(CupertinoIcons.chevron_forward, size: 24),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: teamList.length,
+        itemBuilder: (context, index) => _buildListItem(context, teamList[index]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
