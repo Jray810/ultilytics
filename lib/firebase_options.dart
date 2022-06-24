@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -62,16 +65,6 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBM_xTdtcrNfBa9gZ5v0v3JWxjksMH8Maw',
-    appId: '1:354949227098:ios:27efa75bbfc7876c736e63',
-    messagingSenderId: '354949227098',
-    projectId: 'ultilytics',
-    storageBucket: 'ultilytics.appspot.com',
-    iosClientId: '354949227098-i2pnqn5aupeoedv1mg5pkcnu5riendqd.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ultilytics',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBM_xTdtcrNfBa9gZ5v0v3JWxjksMH8Maw',
     appId: '1:354949227098:ios:27efa75bbfc7876c736e63',
     messagingSenderId: '354949227098',
