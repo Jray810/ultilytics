@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ultilytics/constants/routes.dart';
+import 'package:ultilytics/views/teams/team_roster_view.dart';
 
 class TeamView extends StatefulWidget {
   const TeamView({Key? key}) : super(key: key);
@@ -188,7 +189,7 @@ class _TeamViewState extends State<TeamView> {
             IconButton (
               icon: Icon(CupertinoIcons.person_2),
               onPressed: () {
-                Navigator.of(context).pushNamed(teamRosterRoute);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => TeamRosterView(teamID: 'TFYuB9Jz4djah520IkpQ')));
               },
             ),
             IconButton(
