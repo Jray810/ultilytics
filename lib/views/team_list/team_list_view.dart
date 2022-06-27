@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ultilytics/constants/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ultilytics/views/teams/team_view.dart';
 
 class TeamListView extends StatefulWidget {
   const TeamListView({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _TeamListViewState extends State<TeamListView> {
   Widget _buildListItem(BuildContext context, DocumentSnapshot TeamInfo) {
     return Slidable(
       endActionPane: ActionPane(
-        motion: ScrollMotion(),
+        motion: const ScrollMotion(),
         children: [
           SlidableAction(
             onPressed: (context) {
@@ -38,7 +39,7 @@ class _TeamListViewState extends State<TeamListView> {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                  padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(TeamInfo['imageSource'], width: 74, height: 74, fit: BoxFit.cover)
@@ -48,7 +49,7 @@ class _TeamListViewState extends State<TeamListView> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(8, 1, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(8, 1, 0, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +73,7 @@ class _TeamListViewState extends State<TeamListView> {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
                   child: Icon(CupertinoIcons.chevron_forward, size: 24),
                 ),
@@ -81,7 +82,7 @@ class _TeamListViewState extends State<TeamListView> {
           ]
         ),
         onTap: () {
-          Navigator.of(context).pushNamed(teamRoute);
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => TeamView(teamID: TeamInfo.id.toString())));
         }
       ),
     );
@@ -103,7 +104,7 @@ class _TeamListViewState extends State<TeamListView> {
                   Navigator.of(context).pushNamed(guestProfileRoute);
                 }
               },
-              child: Icon(CupertinoIcons.person)
+              child: const Icon(CupertinoIcons.person)
             ),
           ),
         ],

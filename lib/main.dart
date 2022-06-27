@@ -52,7 +52,6 @@ class MyApp extends StatelessWidget {
         loginRoute: (context) => const LoginView(),
         signupRoute: (context) => const RegisterView(),
         emailConfirmRoute: (context) => const EmailConfirmationView(),
-        teamRoute: (context) => const TeamView(),
         removeTeamRoute: (context) => const RemoveTeamView(),
         teamRosterRoute: (context) => const TeamRosterView(),
         teamGamesRoute: (context) => const TeamGamesView(),
