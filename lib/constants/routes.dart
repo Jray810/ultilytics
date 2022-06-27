@@ -1,5 +1,3 @@
-const controlRoute = '/control/';
-
 // Team Listing Routes
 
 const teamListRoute = '/team-list/';
