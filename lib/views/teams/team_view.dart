@@ -207,7 +207,7 @@ class _TeamViewState extends State<TeamView> {
             IconButton (
               icon: const Icon(CupertinoIcons.person_2),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => TeamRosterView(teamID: 'TFYuB9Jz4djah520IkpQ')));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => TeamRosterView(teamID: widget.teamID)));
               },
             ),
             IconButton(

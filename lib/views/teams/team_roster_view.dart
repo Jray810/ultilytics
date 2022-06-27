@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ultilytics/constants/routes.dart';
+import 'package:ultilytics/views/player/add_player_view.dart';
 
 class TeamRosterView extends StatefulWidget {
   final String teamID;
@@ -37,37 +38,20 @@ class _TeamRosterViewState extends State<TeamRosterView> {
         title: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(PlayerInfo['playerName'])
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(PlayerInfo['jerseyNumber'])
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ),
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                const Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-                  child: Icon(CupertinoIcons.chevron_forward, size: 24),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(PlayerInfo['jerseyNumber'].toString()),
                 ),
-              ],
+              ]
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(PlayerInfo['playerName']),
+              )
             ),
           ]
         ),
@@ -116,7 +100,7 @@ class _TeamRosterViewState extends State<TeamRosterView> {
           icon: const Icon(CupertinoIcons.add),
           label: const Text('Add Player'),
           onPressed: () {
-            Navigator.of(context).pushNamed(addPlayerRoute);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddPlayerView(teamID: widget.teamID)));
           },
         )
       ),
