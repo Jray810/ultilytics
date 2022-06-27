@@ -18,8 +18,9 @@ class _TeamListViewState extends State<TeamListView> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot TeamInfo) {
     return Slidable(
-      endActionPane: ActionPane(
+      startActionPane: ActionPane(
         motion: const ScrollMotion(),
+        extentRatio: 0.2,
         children: [
           SlidableAction(
             onPressed: (context) {
