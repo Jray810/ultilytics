@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ultilytics/constants/routes.dart';
+import 'package:ultilytics/views/games/game_info_view.dart';
 
 class TeamView extends StatefulWidget {
   final String teamID;
@@ -16,6 +17,48 @@ class TeamView extends StatefulWidget {
 class _TeamViewState extends State<TeamView> {
 
   bool isLoggedIn = false;
+
+  Widget _gameListItem(BuildContext context, DocumentSnapshot GameInfo) {
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+      child: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => GameInfoView(teamID: widget.teamID, gameID: GameInfo.id)));
+              },
+              child: Slidable(
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (context) {
+                        Navigator.of(context).pushNamed(removeTeamRoute);
+                      },
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: 'Delete',
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  title: Text(GameInfo['opponent']),
+                  subtitle: Text(GameInfo['tournament']),
+                  trailing: Icon(CupertinoIcons.chevron_forward),
+                )
+              ),
+            ),
+          ],
+        )
+      ),
+    );
+  }
 
   Widget _buildTeamPage(BuildContext context, DocumentSnapshot TeamInfo) {
     return Center(
@@ -91,43 +134,18 @@ class _TeamViewState extends State<TeamView> {
                                 child: Text('Games')
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: const BoxDecoration(),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    GestureDetector(
-                                      behavior: HitTestBehavior.translucent,
-                                      onTap: () {
-                                        Navigator.of(context).pushNamed(gameInfoRoute);
-                                      },
-                                      child: Slidable(
-                                        endActionPane: ActionPane(
-                                          motion: const ScrollMotion(),
-                                          children: [
-                                            SlidableAction(
-                                              onPressed: (context) {
-                                                Navigator.of(context).pushNamed(removeTeamRoute);
-                                              },
-                                              backgroundColor: Colors.red,
-                                              foregroundColor: Colors.white,
-                                              icon: Icons.delete,
-                                              label: 'Delete',
-                                            ),
-                                          ],
-                                        ),
-                                        child: const ListTile(
-                                          title: Text('Game Title'),
-                                          subtitle: Text('Game subtitle'),
-                                          trailing: Icon(CupertinoIcons.chevron_forward),
-                                        )
-                                      ),
-                                    ),
-                                  ],
-                                )
+                            Container(
+                              child: StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance.collection('teams').doc(widget.teamID).collection('games').snapshots(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) return const Text('Loading...');
+                                  return ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) => _gameListItem(context, snapshot.data!.docs[index]),
+                                  );
+                                }
                               ),
                             ),
                           ],
