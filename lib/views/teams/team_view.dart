@@ -34,7 +34,7 @@ class _TeamViewState extends State<TeamView> {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => GameInfoView(teamID: widget.teamID, gameID: GameInfo.id)));
               },
               child: Slidable(
-                endActionPane: ActionPane(
+                startActionPane: ActionPane(
                   motion: const ScrollMotion(),
                   extentRatio: 0.2,
                   children: [
