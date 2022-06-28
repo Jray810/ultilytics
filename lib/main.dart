@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         removeTeamRoute: (context) => const RemoveTeamView(),
         teamGamesRoute: (context) => const TeamGamesView(),
         playerInfoRoute: (context) => const PlayerInfoView(),
-        gameInfoRoute: (context) => const GameInfoView(),
+        addPlayerRoute: (context) => const AddPlayerView(),
         addGameRoute: (context) => const AddGameView(),
       },
     );
