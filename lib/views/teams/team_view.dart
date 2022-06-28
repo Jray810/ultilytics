@@ -105,8 +105,9 @@ class _TeamViewState extends State<TeamView> {
                                         Navigator.of(context).pushNamed(gameInfoRoute);
                                       },
                                       child: Slidable(
-                                        endActionPane: ActionPane(
+                                        startActionPane: ActionPane(
                                           motion: const ScrollMotion(),
+                                          extentRatio: 0.2,
                                           children: [
                                             SlidableAction(
                                               onPressed: (context) {
