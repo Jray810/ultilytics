@@ -129,7 +129,7 @@ class _AddTeamViewState extends State<AddTeamView> {
                     'imageSource' : imageSourceController.text,
                   }
                 );
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.pop(context);
               },
               child: const Text('Create and Add Team'),
             ),

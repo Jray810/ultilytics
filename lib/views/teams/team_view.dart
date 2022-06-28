@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ultilytics/constants/routes.dart';
 import 'package:ultilytics/views/games/game_info_view.dart';
+import 'package:ultilytics/views/teams/team_roster_view.dart';
 
 class TeamView extends StatefulWidget {
   final String teamID;
@@ -35,6 +36,7 @@ class _TeamViewState extends State<TeamView> {
               child: Slidable(
                 endActionPane: ActionPane(
                   motion: const ScrollMotion(),
+                  extentRatio: 0.2,
                   children: [
                     SlidableAction(
                       onPressed: (context) {
@@ -224,7 +226,7 @@ class _TeamViewState extends State<TeamView> {
             IconButton (
               icon: const Icon(CupertinoIcons.person_2),
               onPressed: () {
-                Navigator.of(context).pushNamed(teamRosterRoute);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => TeamRosterView(teamID: widget.teamID)));
               },
             ),
             IconButton(
