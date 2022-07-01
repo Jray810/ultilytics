@@ -1,12 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ultilytics/constants/themes.dart';
 import 'package:ultilytics/firebase_options.dart';
 import 'package:ultilytics/views/auth/email_confirmation_view.dart';
 import 'package:ultilytics/views/auth/login_view.dart';
 import 'package:ultilytics/views/auth/register_view.dart';
 import 'package:ultilytics/views/games/add_game_view.dart';
-import 'package:ultilytics/views/games/game_info_view.dart';
-import 'package:ultilytics/views/player/add_player_view.dart';
 import 'package:ultilytics/views/player/player_info_view.dart';
 import 'package:ultilytics/views/profile/guest_profile_view.dart';
 import 'package:ultilytics/views/profile/signed_in_profile_view.dart';
@@ -16,11 +15,8 @@ import 'package:ultilytics/views/team_list/migrate_team_view.dart';
 import 'package:ultilytics/views/team_list/team_list_view.dart';
 import 'package:ultilytics/views/teams/remove_team_view.dart';
 import 'package:ultilytics/views/teams/team_games_view.dart';
-import 'package:ultilytics/views/teams/team_roster_view.dart';
-import 'package:ultilytics/views/teams/team_view.dart';
 
 import 'constants/routes.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,10 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ultilytics',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: GoogleFonts.poppins().fontFamily,
-      ),
+      theme: lightTheme,
       home: const TeamListView(),
       routes: {
         teamListRoute: (context) => const TeamListView(),

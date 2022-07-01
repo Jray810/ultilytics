@@ -58,13 +58,19 @@ class _TeamListViewState extends State<TeamListView> {
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text(TeamInfo['teamName'])
+                        Text(
+                          TeamInfo['teamName'],
+                          style: Theme.of(context).textTheme.titleLarge,
+                        )
                       ],
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text('id: ${TeamInfo.id}'),
+                        Text(
+                          'id: ${TeamInfo.id}',
+                          style: Theme.of(context).textTheme.labelMedium
+                        ),
                       ],
                     ),
                   ],
