@@ -85,7 +85,7 @@ class _TeamRosterViewState extends State<TeamRosterView> {
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('teams').doc(widget.teamID).collection('roster').snapshots(),
+        stream: FirebaseFirestore.instance.collection('teams').doc(widget.teamID).collection('roster').orderBy('playerName').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Text('Loading...');
           return ListView.builder(
