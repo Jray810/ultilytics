@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ultilytics/views/games/edit_point_view.dart';
@@ -51,7 +52,7 @@ class _GameInfoViewState extends State<GameInfoView> {
                       8, 0, 0, 0),
                   child: Card(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: pointInfo['scored'] == true ? Colors.green : Colors.red,
+                    color: pointInfo['ourScore'] == -1 ? Colors.grey : (pointInfo['scored'] == true ? Colors.green : Colors.red),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40),
                     ),
@@ -85,6 +86,7 @@ class _GameInfoViewState extends State<GameInfoView> {
                           CrossAxisAlignment.start,
                       children: [
                         Text(
+                          pointInfo['ourScore'] == -1 ? 'In Progress' :
                           (pointInfo['scored'] ? 'Our ' : 'Their ') + (pointInfo['openingPull'] != pointInfo['scored'] ? 'hold' : 'break'),
                           // style: FlutterFlowTheme.of(context)
                           //     .subtitle1
@@ -126,6 +128,7 @@ class _GameInfoViewState extends State<GameInfoView> {
                         CrossAxisAlignment.end,
                     children: [
                       Text(
+                        pointInfo['ourScore'] == -1 ? '' :
                         '${pointInfo['ourScore']} - ${pointInfo['theirScore']}',
                         textAlign: TextAlign.end,
                         style: TextStyle(color: pointInfo['ourScore'] < pointInfo['theirScore'] ? Colors.red : Colors.green, fontSize: 20),
@@ -343,7 +346,36 @@ class _GameInfoViewState extends State<GameInfoView> {
         elevation: 4.0,
         icon: const Icon(CupertinoIcons.add),
         label: const Text('Add Point'),
-        onPressed: () {},
+        onPressed: () async {
+          DocumentReference docRef = FirebaseFirestore.instance.collection('teams').doc(widget.teamID).collection('games').doc(widget.gameID);
+          DocumentSnapshot gameSnap = await docRef.get();
+          bool pulling = !gameSnap['startingOffense'];
+          QuerySnapshot qSnap = await docRef.collection('points').get();
+          int pointNum = qSnap.docs.length + 1;
+          if (pointNum > 1) {
+            int lastPointNum = pointNum-1;
+            DocumentSnapshot lastPoint = await docRef.collection('points').doc(lastPointNum.toString()).get();
+            pulling = lastPoint['scored'];
+          }
+          await docRef.collection('points').doc(pointNum.toString()).set(
+            {
+              'pointNumber' : pointNum,
+              'openingPull' : pulling,
+              'players' : {
+                'player1' : '',
+                'player2' : '',
+                'player3' : '',
+                'player4' : '',
+                'player5' : '',
+                'player6' : '',
+                'player7' : '',
+              },
+              'ourScore' : -1,
+              'theirScore' : -1,
+              'scored' : null,
+            }
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
