@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ultilytics/views/games/edit_point_view.dart';
 
 import '../../constants/routes.dart';
+import 'dart:math' as math;
 
 class GameInfoView extends StatefulWidget {
   final String teamID;
@@ -162,28 +163,33 @@ class _GameInfoViewState extends State<GameInfoView> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 12),
           child: Container(
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width * 0.92,
             height: 140,
             decoration: BoxDecoration(
-              color: Colors.blue,
               boxShadow: [
                 BoxShadow(
-                  blurRadius: 5,
-                  color: Color(0x32171717),
+                  blurRadius: 6,
+                  color: Color(0x4B1A1F24),
                   offset: Offset(0, 2),
                 )
               ],
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(0),
+              gradient: LinearGradient(
+                colors: [
+                  // Color(0xffee8b60),
+                  Colors.blue,
+                  Color(0xff4b39ef),
+                ],
+                stops: [0, 1],
+                begin: AlignmentDirectional(0.94, -1),
+                end: AlignmentDirectional(-0.94, 1),
+                transform: GradientRotation(math.pi / 4),
               ),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 12),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -198,14 +204,10 @@ class _GameInfoViewState extends State<GameInfoView> {
                                 0, 4, 0, 0),
                             child: Text(
                               gameInfo['opponent'],
-                              // style: FlutterFlowTheme.of(context)
-                              //     .title1
-                              //     .override(
-                              //       fontFamily: 'Lexend Deca',
-                              //       color: Colors.white,
-                              //       fontSize: 24,
-                              //       fontWeight: FontWeight.bold,
-                              //     ),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                              ),
                             ),
                           ),
                         ),
@@ -223,14 +225,10 @@ class _GameInfoViewState extends State<GameInfoView> {
                               EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                           child: Text(
                             gameInfo['tournament'],
-                            // style: FlutterFlowTheme.of(context)
-                            //     .title1
-                            //     .override(
-                            //       fontFamily: 'Lexend Deca',
-                            //       color: Colors.white,
-                            //       fontSize: 36,
-                            //       fontWeight: FontWeight.normal,
-                            //     ),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                           ),
                         ),
                         Row(
